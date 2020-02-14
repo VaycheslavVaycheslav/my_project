@@ -7,17 +7,17 @@ const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 const moreHtmls = []
-const pugRegExp = /.*\.pug$/
+const pugRegExp = /.*\.html$/
 const imgPath = 'src/static/images'
 const fontsPath = 'src/static/fonts'
 
-fs.readdirSync('./src/pug/pages')
+fs.readdirSync('./src/html/pages')
   .forEach(name => {
     if (pugRegExp.test(name)) {
       moreHtmls.push(new HtmlWebpackPlugin({
-        filename: `${name.slice(0,-4)}.html`,
-        template: `./pug/pages/${name}`,
-      }), new HtmlWebpackPugPlugin())
+        filename: `${name}`,
+        template: `./html/pages/${name}`,
+      }))
     }
   }
 )
@@ -85,8 +85,8 @@ const font = {
   ],
 }
 
-const pug = {
-  test: /\.pug$/,
+const html = {
+  test: /\.html$/,
   use: [
     { loader: "html-loader",
       options: {
@@ -96,17 +96,13 @@ const pug = {
         attrs: false,
       },
     },
-    { loader: 'pug-html-loader',
-      options: {
-        pretty: true,
-      },
-    },
   ]
 }
 
 module.exports = {
   context: path.join(process.cwd(), 'src'),
   entry: [
+    './html/pages/index.html',
     './js/index.js',
     './scss/index.scss',
     ...images,
@@ -118,7 +114,7 @@ module.exports = {
     publicPath: '/',
   },
   module: {
-    rules: [ babel, scss, url, font, pug, ]
+    rules: [ babel, scss, url, font, html, ]
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -132,7 +128,7 @@ module.exports = {
     ...moreHtmls,
   ],
   resolve: {
-    extensions: ['.js', '.scss', '.pug', 'html'],
+    extensions: ['.js', '.scss', '.html'],
     modules: [path.join(process.cwd(), 'src'), 'node_modules'],
     alias: {
       '@fortawesome': '@fortawesome/fontawesome-free',
