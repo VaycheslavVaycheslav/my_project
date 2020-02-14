@@ -1,0 +1,21 @@
+// Variables
+@import './variables';
+
+// Assets
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+// Fonts
+@import './fonts';
+
+// Base
+@import './global';
+@import './mixins';
+@import './media';
+
+// Components
+@import './common.block/header';
+@import './common.block/content';
+@import './common.block/footer';
