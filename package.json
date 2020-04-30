@@ -52,6 +52,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   }
 }
